@@ -1,0 +1,405 @@
+//Tarea-Ejercicio-Redes-sociales.
+//López González Ángel Manuel 
+
+package tareacsv;
+
+import static edu.epromero.util.LienzoStd.linea;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.swing.JOptionPane;
+      
+public class LeerCSV {
+    
+    
+    public static void main(String[] args) throws IOException
+    {
+      
+        int A;
+        int B;
+        
+        String filePath = "\\Users\\lopez\\Downloads\\presenciaredes.csv";
+        List<Redes> redes = new ArrayList <>();
+        
+        try (Stream<String> StreamFile = Files.lines(Paths.get(filePath))){
+           redes = StreamFile.map(linea -> linea.split(",")).map((String[] arreglo) -> {
+                Redes red = new Redes(arreglo[0], arreglo[1], arreglo[2], arreglo[3], arreglo[4], arreglo[5], arreglo[6], arreglo[7], arreglo[8], arreglo[9], arreglo[10], arreglo[11], arreglo[12], arreglo[13], arreglo[14]);
+                return red;
+            }).collect(Collectors.toList());
+           
+         redes.forEach(System.out::println);
+        }catch(IOException io){
+            System.err.println("Lo siento, existe un error en" + io.getMessage());
+            
+        }
+        
+        A = Integer.parseInt(JOptionPane.showInputDialog("¿Qué desea hacer a continuacion? \n 1- Ver solo Twitter \n 2- Ver solo Youtube \n 3- Ver solo Facebook"));
+
+       switch(A){
+           case 1:          System.out.println("\n");
+        try (Stream<String> StreamFile = Files.lines(Paths.get(filePath))){
+           redes = StreamFile.map(linea -> linea.split(",")).filter(p -> p[0].startsWith("T")).map(arreglo -> {
+                Redes red = new Redes(arreglo[0], arreglo[1], arreglo[2], arreglo[3], arreglo[4], arreglo[5], arreglo[6], arreglo[7], arreglo[8], arreglo[9], arreglo[10], arreglo[11], arreglo[12], arreglo[13], arreglo[14]);
+                return red;
+            }).collect(Collectors.toList());
+           
+         redes.forEach(System.out::println);
+        }catch(IOException io){
+            System.err.println("Lo siento, existe un error en" + io.getMessage());
+            
+       
+       
+
+        }
+        
+        
+           case 2: System.out.println("\n");
+        try (Stream<String> StreamFile = Files.lines(Paths.get(filePath))){
+           redes = StreamFile.map(linea -> linea.split(",")).filter(p -> p[0].startsWith("Y")).map(arreglo -> {
+                Redes red = new Redes(arreglo[0], arreglo[1], arreglo[2], arreglo[3], arreglo[4], arreglo[5], arreglo[6], arreglo[7], arreglo[8], arreglo[9], arreglo[10], arreglo[11], arreglo[12], arreglo[13], arreglo[14]);
+                return red;
+            }).collect(Collectors.toList());
+           
+         redes.forEach(System.out::println);
+        }catch(IOException io){
+            System.err.println("Lo siento, existe un error en" + io.getMessage());
+            
+        }
+               
+           case 3:  System.out.println("\n");
+        try (Stream<String> StreamFile = Files.lines(Paths.get(filePath))){
+           redes = StreamFile.map(linea -> linea.split(",")).filter(p -> p[0].startsWith("F")).map(arreglo -> {
+                Redes red = new Redes(arreglo[0], arreglo[1], arreglo[2], arreglo[3], arreglo[4], arreglo[5], arreglo[6], arreglo[7], arreglo[8], arreglo[9], arreglo[10], arreglo[11], arreglo[12], arreglo[13], arreglo[14]);
+                return red;
+            }).collect(Collectors.toList());
+           
+         redes.forEach(System.out::println);
+        }catch(IOException io){
+            System.err.println("Lo siento, existe un error en" + io.getMessage());
+            
+        }
+               
+       }
+ B = Integer.parseInt(JOptionPane.showInputDialog("¿Qué deseas hacer ahora? \n 1- Ver el crecimiento Enero - Junio \n 2- nada"));
+ 
+              switch(B){
+             case 1:          System.out.println("\n");
+        try (Stream<String> StreamFile = Files.lines(Paths.get(filePath))){
+           redes = StreamFile.map(linea -> linea.split(",")).filter(p -> p[0].startsWith("T")).map(arreglo -> {
+                Redes red = new Redes(arreglo[0], arreglo[1], arreglo[2], Integer.parseInt(arreglo[3] = arreglo[3] - arreglo[8]));
+                return red;
+            }).collect(Collectors.toList());
+           
+         redes.forEach(System.out::println);
+         
+         
+        }
+         case 2: 
+              System.out.println("\n");
+              System.out.println("Gracias por usar mis servisios");
+              }
+        
+             
+       
+        }
+        
+    }
+            
+//Esto es otra clase pero no sé como separar profe deme un tutorial de github :´v
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tareacsv;
+
+
+public class Redes {
+
+
+   
+    private String rsocial;
+    private String con;
+    private String ano;
+    private String Ene;
+    private String Feb;
+    private String Mar;
+    private String Abr;
+    private String May;
+    private String Jun;
+    private String Jul;
+    private String Agt;
+    private String Sep;
+    private String Oct;
+    private String Nov;
+    private String Dic;
+    
+    /**
+     *
+     * @param rsocial
+     * @param con
+     * @param ano
+     * @param Ene
+     * @param Feb
+     * @param Mar
+     * @param Abr
+     * @param May
+     * @param Jun
+     * @param Jul
+     * @param Agt
+     * @param Sep
+     * @param Oct
+     * @param Nov
+     * @param Dic
+     */
+    public Redes(String rsocial, String con, String ano, String Ene, String Feb, 
+            String Mar, String Abr, String May, String Jun, String Jul, String Agt, String Sep, String Oct, String Nov, String Dic) {
+        this.rsocial = rsocial;
+        this.ano = ano; 
+        this.con = con;
+        this.Ene = Ene; 
+        this.Feb = Feb;
+        this.Mar = Mar; 
+        this.Abr = Abr; 
+        this.May = May;
+        this.Jun = Jun;
+        this.Jul = Jul;
+        this.Agt = Agt;
+        this.Sep = Sep;
+        this.Oct = Oct;
+        this.Nov = Nov;
+        this.Dic = Dic;
+        
+    }
+
+    Redes(String string, String string0, String string1, String string2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**
+     * @return the rsocial
+     */
+    public String getRsocial() {
+        return rsocial;
+    }
+
+    /**
+     * @param rsocial the rsocial to set
+     */
+    public void setRsocial(String rsocial) {
+        this.rsocial = rsocial;
+    }
+
+    /**
+     * @return the con
+     */
+    public String getCon() {
+        return con;
+    }
+
+    /**
+     * @param con the con to set
+     */
+    public void setCon(String con) {
+        this.con = con;
+    }
+
+    /**
+     * @return the ano
+     */
+    public String getAno() {
+        return ano;
+    }
+
+    /**
+     * @param ano the ano to set
+     */
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
+
+    /**
+     * @return the Ene
+     */
+    public String getEne() {
+        return Ene;
+    }
+
+    /**
+     * @param Ene the Ene to set
+     */
+    public void setEne(String Ene) {
+        this.Ene = Ene;
+    }
+
+    /**
+     * @return the Feb
+     */
+    public String getFeb() {
+        return Feb;
+    }
+
+    /**
+     * @param Feb the Feb to set
+     */
+    public void setFeb(String Feb) {
+        this.Feb = Feb;
+    }
+
+    /**
+     * @return the Mar
+     */
+    public String getMar() {
+        return Mar;
+    }
+
+    /**
+     * @param Mar the Mar to set
+     */
+    public void setMar(String Mar) {
+        this.Mar = Mar;
+    }
+
+    /**
+     * @return the Abr
+     */
+    public String getAbr() {
+        return Abr;
+    }
+
+    /**
+     * @param Abr the Abr to set
+     */
+    public void setAbr(String Abr) {
+        this.Abr = Abr;
+    }
+
+    /**
+     * @return the May
+     */
+    public String getMay() {
+        return May;
+    }
+
+    /**
+     * @param May the May to set
+     */
+    public void setMay(String May) {
+        this.May = May;
+    }
+
+    /**
+     * @return the Jun
+     */
+    public String getJun() {
+        return Jun;
+    }
+
+    /**
+     * @param Jun the Jun to set
+     */
+    public void setJun(String Jun) {
+        this.Jun = Jun;
+    }
+
+    /**
+     * @return the Jul
+     */
+    public String getJul() {
+        return Jul;
+    }
+
+    /**
+     * @param Jul the Jul to set
+     */
+    public void setJul(String Jul) {
+        this.Jul = Jul;
+    }
+
+    /**
+     * @return the Agt
+     */
+    public String getAgt() {
+        return Agt;
+    }
+
+    /**
+     * @param Agt the Agt to set
+     */
+    public void setAgt(String Agt) {
+        this.Agt = Agt;
+    }
+
+    /**
+     * @return the Sep
+     */
+    public String getSep() {
+        return Sep;
+    }
+
+    /**
+     * @param Sep the Sep to set
+     */
+    public void setSep(String Sep) {
+        this.Sep = Sep;
+    }
+
+    /**
+     * @return the Oct
+     */
+    public String getOct() {
+        return Oct;
+    }
+
+    /**
+     * @param Oct the Oct to set
+     */
+    public void setOct(String Oct) {
+        this.Oct = Oct;
+    }
+
+    /**
+     * @return the Nov
+     */
+    public String getNov() {
+        return Nov;
+    }
+
+    /**
+     * @param Nov the Nov to set
+     */
+    public void setNov(String Nov) {
+        this.Nov = Nov;
+    }
+
+    /**
+     * @return the Dic
+     */
+    public String getDic() {
+        return Dic;
+    }
+
+    /**
+     * @param Dic the Dic to set
+     */
+    public void setDic(String Dic) {
+        this.Dic = Dic;
+    }
+    
+    public String toString() {
+        return "[" + " Red social=" + rsocial + " Concepto= " + con + " Año= " + ano + " Enero = " + Ene + " Febrero= " + Feb + " Marzo= " + Mar + " Abril= " + Abr + 
+                " Mayo= " + May + " Junio= " + Jun + " Julio= " + Jul + " Agosto= " + Agt + " Septiembre= " + Sep + " Octubre= " + Oct + " Noviembre= " + Nov + 
+                " Diciembre= " + Dic + "]";
+    }
+
+}
+
+
